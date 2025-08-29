@@ -1,0 +1,37 @@
+app:
+  base-url: https://bfhldevapigw.healthrx.co.in/hiring
+  track: JAVA
+  candidate:
+    name: "Nimish Rao"
+    regNo: "22BAI10054"
+    email: "raonimish25@gmail.com"
+  sql:
+    q1: |
+     
+      SELECT p.AMOUNT AS SALARY,
+      e.FIRST_NAME || ' ' || e.LAST_NAME AS NAME,
+      STRFTIME('%Y', 'now') - STRFTIME('%Y', e.DOB) - (STRFTIME('%m%d', 'now') < STRFTIME('%m%d', e.DOB)) AS AGE,
+      d.DEPARTMENT_NAME
+      FROM
+      PAYMENTS AS p
+      JOIN
+      EMPLOYEE AS e
+      ON p.EMP_ID = e.EMP_ID
+      JOIN
+      DEPARTMENT AS d
+      ON e.DEPARTMENT = d.DEPARTMENT_ID
+      WHERE
+      STRFTIME('%d', p.PAYMENT_TIME) != '01'
+      ORDER BY
+      p.AMOUNT DESC
+      LIMIT 1;
+    q2: |
+      -- TODO: paste your final SQL for Question 2 (even regNo)
+      SELECT
+
+  storage:
+    output-dir: ./out
+
+logging:
+  level:
+    root: INFO
